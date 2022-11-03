@@ -1,0 +1,94 @@
+@import "https://unpkg.com/open-props";
+@import "https://unpkg.com/open-props/normalize.min.css";
+
+/* general styling */
+
+.media-scroller {
+  --spacer: 2rem;
+
+  display: grid;
+  gap: var(--spacer);
+  grid-auto-flow: column;
+  grid-auto-columns: 21%;
+
+  overflow-x: auto;
+
+  /* cada vez que un conteedor tenga su propio scroller
+  es bueno poner la siguiente linea
+  inline es para el eje de las X */
+  overscroll-behavior-inline: contain;
+
+  /* no ocupo padding en el top pero si a los lados y bottom */
+  padding: 0 var(--spacer) var(--spacer);
+}
+
+.media-element {
+  display: grid;
+  /* la siguiente linea lo que hace es alinerar los textos
+  porque sin esto se ve raro */
+  grid-template-rows: min-content;
+  gap: var(--spacer);
+  /* corregimos que unas fotos son mas grandes que otras */
+  padding: var(--spacer);
+  background: var(--surface-2);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-2);
+}
+
+.media-element > img {
+  inline-size: 100%;
+  /* hace todas las imagenes del mismo tamaño */
+  aspect-ratio: 16 / 9;
+  /* el unico problema con la linea anterior es que hace a las imaenes
+  squish y stretch, las alarga y la arreglo con object-fit: cover 
+  recorta un poco las imagenes pero lo bueno es que le quita lo
+  squish 
+  ya se ve mas uniforme*/
+  object-fit: cover;
+}
+
+.snaps-inline {
+  /* arriba tengo un scroller ahora hare un scroll-snap */
+  /* x mandatory
+     y mandatory
+     inline mandatory 
+     este es el orden, mandatory va al final*/
+  scroll-snap-type: inline mandatory;
+}
+
+.snaps-inline > * {
+  /* selecciono snaps-inline y luego todos los hijos directos de él */
+  scroll-snap-align: start;
+  scroll-padding-inline: var(--spacer, 1rem);
+}
+
+.container {
+  inline-size: min(100% - 4rem, 70rem);
+  margin-inline: auto;
+}
+
+.flow {
+  display: grid;
+  gap: var(--size-3);
+}
+
+.page-header {
+  padding-block: var(--size-9);
+  margin-block-end: var(--size-9);
+  background: var(--gradient-16);
+  color: var(--gray-0);
+  box-shadow: var(--shadow-2);
+}
+
+.page-title {
+  font-size: var(--font-size-fluid-3);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-fluid-1);
+}
+
+.section-title {
+  padding-inline-start: var(--size-6);
+  margin-block: var(--size-9) var(--size-3);
+}
